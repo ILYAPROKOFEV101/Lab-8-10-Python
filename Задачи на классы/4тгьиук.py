@@ -38,25 +38,57 @@ class Car(Transport):
             print(f"Ошибка: превышена грузоподъёмность {self.capacity} кг")
 
 
+# Функция для ввода данных о грузоподъёмности
+def get_capacity():
+    while True:
+        try:
+            capacity = float(input("Введите грузоподъёмность (в кг): "))
+            if capacity <= 0:
+                print("Ошибка: грузоподъёмность должна быть положительным числом.")
+                continue
+            return capacity
+        except ValueError:
+            print("Ошибка: введите корректное число.")
+
+
+# Функция для ввода данных о весе груза
+def get_cargo_weight():
+    while True:
+        try:
+            weight = float(input("Введите вес груза (в кг): "))
+            if weight < 0:
+                print("Ошибка: вес груза не может быть отрицательным.")
+                continue
+            return weight
+        except ValueError:
+            print("Ошибка: введите корректное число.")
+
+
 # Демонстрация работы с объектами
 
-# Создаём первый автомобиль с грузоподъёмностью 1000 кг
-car1 = Car(1000)
+# Создаем первый автомобиль
+print("Создание первого автомобиля:")
+capacity1 = get_capacity()
+car1 = Car(capacity1)
 
-# Устанавливаем вес груза в 500 кг
-car1.set_cargo_weight(500)
+# Устанавливаем вес груза
+cargo_weight1 = get_cargo_weight()
+car1.set_cargo_weight(cargo_weight1)
 
 # Пытаемся увеличить вес на 10 кг (в пределах нормы)
-car1.increase_cargo_weight()
+car1.increase_cargo_weight(10)
 
 # Пытаемся увеличить вес так, чтобы превысить грузоподъёмность
-car1.increase_cargo_weight(600)
+car1.increase_cargo_weight(600)  # Увеличение на 600 кг, ожидается ошибка
 
-# Создаём второй автомобиль с грузоподъёмностью 1500 кг
-car2 = Car(1500)
+# Создаем второй автомобиль
+print("\nСоздание второго автомобиля:")
+capacity2 = get_capacity()
+car2 = Car(capacity2)
 
-# Устанавливаем вес груза в 1600 кг (превышает грузоподъёмность)
-car2.set_cargo_weight(1600)
+# Устанавливаем вес груза
+cargo_weight2 = get_cargo_weight()
+car2.set_cargo_weight(cargo_weight2)
 
 # Устанавливаем вес груза в 1000 кг и увеличиваем его до предела
 car2.set_cargo_weight(1000)
